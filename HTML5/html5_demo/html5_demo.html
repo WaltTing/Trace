@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 API</title>
+    <meta charset="UTF-8">
+    <style>body{text-align: center;}#div1{ width:198px; height: 66px; padding: 10px; border:1px solid #aaaaaa;}
+    img{ width: 150px; height: 50px;}</style>
+</head>
+<body>
+<h1>------SVG</h1>
+<!--svg-->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+    <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="yellow">
+    </circle>
+</svg>
+<h1>------canvas</h1>
+<!--canvas-->
+<canvas id="myCanvas" width="200" height="100" style="border: 1px solid #c3c3c3;"></canvas>
+<script>
+    var c = document.getElementById("myCanvas");
+    var cxt = c.getContext("2d");
+    cxt.beginPath();
+    cxt.arc(70,18,15,0,Math.PI*2,true);
+    cxt.closePath();
+    cxt.fill();
+</script>
+<!--drag-->
+<h1>------拖拽</h1>
+<p>请把图片拖进方框内</p>
+<div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div><br/>
+<img id="drag1" src="1.jpg" draggable="true" ondragstart="drag(event)">
+<script>
+    function allowDrop(ev){
+        ev.preventDefault();
+    }
+    function drag(ev){
+        ev.dataTransfer.setData("Text",ev.target.id);
+    }
+    function drop(ev){
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("Text");
+        ev.target.appendChild(document.getElementById(data));
+    }
+</script>
+<!--audio-->
+<h1>------音频</h1>
+<p>贝加尔湖畔</p>
+<audio src="beijiaerhupan.mp3" controls="controls">您的浏览器不支持audio元素</audio>
+<!--video-->
+<h1>------视频</h1>
+<div style="text-align: center">
+    <button onclick="playPause()">播放/暂停</button>
+    <button onclick="makeBig()">大</button>
+    <button onclick="makeNormal()">中</button>
+    <button onclick="makeSmall()">小</button>
+    <br/>
+    <video id="video1" width="420" style="margin-top: 15px">
+        <source src="mov_bbb.ogg" type="video/ogg"/>
+        您的浏览器不支持HTML5 video.
+    </video>
+</div>
+<script>
+    var myVideo = document.getElementById("video1");
+    function playPause() {
+        if(myVideo.paused){
+            myVideo.play();
+        }else {
+            myVideo.pause();
+        }
+    }
+    function makeBig() {
+        myVideo.width =1500;
+    }
+    function makeNormal() {
+        myVideo.width = 500;
+    }
+</script>
+</body>
+</html>
